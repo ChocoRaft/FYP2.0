@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "542420927600",
+    "project_id": "fyp-crashapp",
+    "storage_bucket": "fyp-crashapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542420927600:android:1482b5b204f598b69060b5",
+        "android_client_info": {
+          "package_name": "com.rafay.fyp20"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542420927600-465i3esku6gvo1vk7pa7s63279euaurv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-CHQ-SEQaup5i_JE-VDIL4H-BQghvTXQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542420927600-465i3esku6gvo1vk7pa7s63279euaurv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
