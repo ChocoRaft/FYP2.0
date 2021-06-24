@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
     android:id="@+id/activity_personal_info"
     android:layout_width="match_parent"
     android:layout_height="650sp"
@@ -95,22 +95,25 @@
         android:layout_alignStart="@+id/view3" />
 
     <ImageView
-        android:layout_width="22sp"
-        android:layout_height="22sp"
         android:id="@+id/imageView4"
-        android:src="@drawable/policy1"
-        android:layout_alignBottom="@+id/editTextPolicyNumber"
+        android:layout_width="3dp"
+        android:layout_height="5dp"
+        android:layout_alignStart="@+id/view4"
         android:layout_alignLeft="@+id/view4"
-        android:layout_alignStart="@+id/view4" />
+        android:layout_alignBottom="@+id/editTextPolicyNumber"
+        android:src="@drawable/policy1" />
 
     <ImageView
+        android:id="@+id/imageView5"
         android:layout_width="24sp"
         android:layout_height="24sp"
-        android:id="@+id/imageView5"
-        android:src="@drawable/blue_phone"
-        android:layout_alignBottom="@+id/editTextPhoneNumber"
+        android:layout_alignEnd="@+id/imageView4"
         android:layout_alignRight="@+id/imageView4"
-        android:layout_alignEnd="@+id/imageView4" />
+        android:layout_alignBottom="@+id/editTextPhoneNumber"
+        android:layout_marginEnd="-19dp"
+        android:layout_marginRight="-19dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/blue_phone" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -139,18 +142,18 @@
         android:layout_marginTop="13dp" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/editTextPolicyNumber"
-        android:background="@null"
-        android:textColor="#003366"
-        android:hint="Policy Number"
-        android:gravity="center"
-        android:textColorHint="#003366"
-        android:inputType="text"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_below="@+id/view4"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="12dp"
+        android:background="@null"
+        android:gravity="center"
+        android:hint="Policy Number"
+        android:inputType="text"
+        android:textColor="#003366"
+        android:textColorHint="#003366" />
 
     <Button
         android:layout_width="330sp"

@@ -77,10 +77,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter your last name", Toast.LENGTH_SHORT).show();
             return;
         }
-        else if (TextUtils.isEmpty(policyNumber)) {
-            Toast.makeText(this, "Please enter your policy number", Toast.LENGTH_SHORT).show();
-            return;
-        }
         else if (TextUtils.isEmpty(phoneNumber)) {
             Toast.makeText(this, "Please enter your phone number", Toast.LENGTH_SHORT).show();
             return;
