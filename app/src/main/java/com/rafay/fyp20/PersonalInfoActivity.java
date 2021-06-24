@@ -86,7 +86,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
             return;
         }
 
-        Toast.makeText(this, "Go To Home", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Go To Home", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(this, SignUpActivity.class);
         Bundle mBundle = new Bundle();

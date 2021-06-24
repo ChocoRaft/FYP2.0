@@ -38,6 +38,9 @@ public class MyEmerContActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
+    private static final int CONTACT_PERMISSION_CODE = 1;
+    private static final int CONTACT_PICK_CODE = 2;
+
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
@@ -200,6 +203,9 @@ public class MyEmerContActivity extends AppCompatActivity {
         adapter = new ContactListAdapter(add, R.layout.emercontact_list_item,MyEmerContActivity.this,email);
         dataList.setAdapter(adapter);
 
+
+
+
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,6 +213,13 @@ public class MyEmerContActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+
+
+
+
     }
 
     // Expandable list items initialisation

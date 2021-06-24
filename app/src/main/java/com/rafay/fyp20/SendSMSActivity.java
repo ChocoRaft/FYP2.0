@@ -39,10 +39,10 @@ public class SendSMSActivity extends Activity {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     private String username = "";
-
+    private String message;
     private Button buttonSend, buttonCancel;
     private TextView textViewPhoneNumber, textViewName, textViewTimer, textViewEmergencyMessage;
-
+    private double latitude, longitude;
     private String phoneNumberArray[];
     private List<String> hospitals;
     private ArrayList<EmerContact> add = new ArrayList<>();
@@ -59,6 +59,8 @@ public class SendSMSActivity extends Activity {
 
         // Create required objects
         mGPSHandler = new GPSHandler(this);
+
+
         mDatabase = new DBEmergency(this);
         mSmsManager = SmsManager.getDefault();
         mediaPlayeralarm = MediaPlayer.create(this, R.raw.rising_swoops);
@@ -67,12 +69,15 @@ public class SendSMSActivity extends Activity {
         setupFirebase();
         setupUI();
         setupTimer();
+
+
     }
 
     public void cancelAlarm(View view) {
         CustomToastActivity.showCustomToast("Alarm was cancelled");
         mediaPlayeralarm.pause();
         timer.cancel();
+        mGPSHandler.close();
         finish();
     }
 
@@ -88,11 +93,13 @@ public class SendSMSActivity extends Activity {
         List<EmerContact> contact;
 
         textViewTimer = (TextView) findViewById(R.id.timer);
-        textViewEmergencyMessage = (TextView) findViewById(R.id.emergencymessage);
+        //textViewEmergencyMessage = (TextView) findViewById(R.id.emergencymessage);
         textViewPhoneNumber = (TextView) findViewById(R.id.phone1);
         textViewName = (TextView) findViewById(R.id.name1);
         buttonSend = (Button) findViewById(R.id.send);
         buttonCancel = (Button) findViewById(R.id.cancel);
+
+
 
         contact = mDatabase.getContact(email);
         for (EmerContact cn : contact) {
@@ -120,8 +127,8 @@ public class SendSMSActivity extends Activity {
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "AvenirNextLTPro-UltLtCn.otf");
         textViewPhoneNumber.setTypeface(custom_font,Typeface.BOLD);
         textViewName.setTypeface(custom_font,Typeface.BOLD);
-        textViewEmergencyMessage.setTypeface(custom_font, Typeface.BOLD);
-        textViewTimer.setTypeface(custom_font,Typeface.BOLD_ITALIC);
+        //textViewEmergencyMessage.setTypeface(custom_font, Typeface.BOLD);
+        textViewTimer.setTypeface(custom_font,Typeface.BOLD);
         buttonCancel.setTypeface(custom_font, Typeface.BOLD);
         buttonSend.setTypeface(custom_font, Typeface.BOLD);
     }
@@ -167,7 +174,7 @@ public class SendSMSActivity extends Activity {
         timer = new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                textViewTimer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                textViewTimer.setText(""+millisUntilFinished / 1000);
                 //here you can have your logic to set text to edittext
                 mediaPlayeralarm.start();
 
@@ -181,6 +188,7 @@ public class SendSMSActivity extends Activity {
         };
 
         timer.start();
+
     }
 
     /* Function to send a alert text message */
@@ -191,7 +199,7 @@ public class SendSMSActivity extends Activity {
 
         // Need to divide the message for the SMS handler to handle a long message
         String message = constructMessage();
-        textViewEmergencyMessage.setText(message);
+        //textViewEmergencyMessage.setText(message);
         ArrayList<String> dividedMessage = mSmsManager.divideMessage(message);
 
         // Need to send message to all emergency contacts
@@ -203,23 +211,30 @@ public class SendSMSActivity extends Activity {
                 e.printStackTrace();
             }
         }
-
+        mGPSHandler.close();
         finish();
     }
 
     /* Function to put together the text message */
     private String constructMessage() {
+        latitude = mGPSHandler.getLatitude();
+        longitude = mGPSHandler.getLongitude();
         String location = mGPSHandler.getCurrentAddress();
-        String message = "Alert! It appears  that the " + username
+        String message = "Alert! It appears that " + username
                 + " may have been in a car accident. " +  username
                 + " has chosen you as their emergency contact. " + username
-                + "'s current location is " + location
-                + " . Nearby hospitals include ";
+                + "'s current location is " + location + "\n"
+                + ("http://maps.google.com/?q="+String.valueOf(latitude)+","+String.valueOf(longitude))
+                +"\n" + "Nearest hospitals include: ";
         for (String hospital : hospitals) {
             message += hospital + "; ";
         }
 
         return message;
     }
+
+
+
+
 
 }

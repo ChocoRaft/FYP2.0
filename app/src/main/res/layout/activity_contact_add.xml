@@ -99,5 +99,19 @@
         android:layout_alignStart="@+id/view1.1"
         android:layout_alignEnd="@+id/view1.1" />
 
+    <Button
+        android:id="@+id/contactsAdd"
+        android:layout_width="295dp"
+        android:layout_height="58dp"
+        android:layout_below="@+id/text_add"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="272dp"
+        android:background="@drawable/button_back2"
+        android:text="Add from Phonebook"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
 
 </RelativeLayout>

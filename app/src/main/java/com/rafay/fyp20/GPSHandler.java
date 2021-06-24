@@ -28,7 +28,7 @@ import java.util.List;
 
 public class GPSHandler extends Handler {
 
-    private static final long MIN_TIME = 0;
+    private static final long MIN_TIME = 500;
     private static final float MIN_DISTANCE = 0;
     private static final int MAX_RESULTS = 1;
 
@@ -36,6 +36,7 @@ public class GPSHandler extends Handler {
     private LocationManager mLocationManager;
     private Geocoder mGeocoder;
     private String currentAddress;
+    private Location currentLocation;
     private List<String> hospitalAddresses;
 
     private List<Point> mPoints;
@@ -64,13 +65,13 @@ public class GPSHandler extends Handler {
     private LocationListener mLocationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            Log.d("debug", "location changed");
+            Log.d("debug", "GPS Handler called");
             findCurrentAddress(location);
             findHospitalAddress(location);
-
+            currentLocation = location;
             Point mPoint = new Point(location.getLongitude(), location.getLatitude(), System.currentTimeMillis());
             mPoints.add(mPoint);
-            Log.d("TAG", "Speed: "+calcSpeed());
+            //Log.d("TAG", "Speed: "+calcSpeed());
 
         }
 
@@ -123,19 +124,27 @@ public class GPSHandler extends Handler {
                     JSONArray results = jsonObject.getJSONArray("results"); // Returns the hospitals found
 
                     hospitalAddresses.clear();
-                    for (int ii = 0; ii < results.length(); ++ii) {
+                    for (int ii = 0; ii < 3; ++ii) {
                         JSONObject jsonObjectEachResult = results.getJSONObject(ii);
 
                         String name = jsonObjectEachResult.optString("name");
                         String vicinity = jsonObjectEachResult.optString("vicinity");
 
-                        hospitalAddresses.add(name + " at " + vicinity);
+                        hospitalAddresses.add("\n"+name + " at " + vicinity);
                     }
                 } catch (Exception ex) {}
             }
         }).start();
     }
+    public void getSpeed(){
 
+    }
+    public double getLatitude(){
+        return currentLocation.getLatitude();
+    }
+    public double getLongitude(){
+        return currentLocation.getLongitude();
+    }
 
     public double calcSpeed() {
         if (mPoints.size() < 2) {
